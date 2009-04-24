@@ -1,0 +1,7 @@
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/map_fields
+lib/map_fields.rb
+test/test_map_fields.rb
