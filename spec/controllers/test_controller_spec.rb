@@ -13,7 +13,7 @@ describe TestController do
         end
         FasterCSV.should_receive(:foreach)
 
-        post :create, :file => test_file
+        post :create, :file => test_file, :user => {:first_name => 'Test', :last_name => 'User'}
       end
 
       it "should assign to @fields" do
@@ -22,6 +22,18 @@ describe TestController do
 
       it "should store the file location in the session" do
         session[:map_fields][:file].should_not be_blank
+      end
+
+      it "should assign to @parameters" do 
+        assigns[:parameters].should_not be_blank
+      end
+
+      it "should have the first name parameter" do
+        assigns[:parameters].should include(['user[first_name]', 'Test'])
+      end
+
+      it "should have the last name parameters" do
+        assigns[:parameters].should include(['user[last_name]', 'User'])
       end
     end
 

@@ -1,4 +1,7 @@
 <% form_tag nil, :method => :post do -%>
+  <% @parameters.each do |arr| -%>
+    <%= hidden_field_tag arr[0], arr[1] %>
+  <% end -%>
   <div class="map_fields">
     <table cellspacing="0">
       <thead>

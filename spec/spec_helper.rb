@@ -20,7 +20,7 @@ Spec::Runner.configure do |config|
 end
 
 class TestController < ApplicationController
-  map_fields :create, ['Title', 'Firstname', 'Lastname']
+  map_fields :create, ['Title', 'Firstname', 'Lastname'], :params => [:user]
 
   def new
   end

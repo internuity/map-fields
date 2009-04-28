@@ -9,7 +9,8 @@ module MapFields
 
   def map_fields
     default_options = {
-      :file_field => 'file'
+      :file_field => 'file',
+      :params => []
     }
     options = default_options.merge( 
                 self.class.read_inheritable_attribute(:map_fields_options)
@@ -38,6 +39,10 @@ module MapFields
       end
       expected_fields = self.class.read_inheritable_attribute(:map_fields_fields)
       @fields = ([nil] + expected_fields).inject([]){ |o, e| o << [e, o.size]}
+      @parameters = []
+      options[:params].each do |param|
+        @parameters += ParamsParser.parse(params, param)
+      end
     else
       if session[:map_fields][:file].nil? || params[:fields].nil?
         session[:map_fields] = nil
@@ -56,6 +61,10 @@ module MapFields
   def fields_mapped?
     raise @map_fields_error if @map_fields_error
     @mapped_fields
+  end
+
+  def map_field_parameters(&block)
+    
   end
 
   def map_fields_cleanup
@@ -102,5 +111,42 @@ module MapFields
   end
 
   class MissingFileContentsError < StandardError
+  end
+
+  class ParamsParser
+    def self.parse(params, field = nil)
+      result = []
+      params.each do |key,value|
+        if field.nil? || field.to_s == key.to_s
+          check_values(value) do |k,v|
+            result << ["#{key.to_s}#{k}", v]
+          end
+        end
+      end
+      result
+    end
+
+    private
+    def self.check_values(value, &block)
+      result = []
+      if value.kind_of?(Hash)
+        value.each do |k,v|
+          check_values(v) do |k2,v2|
+            result << ["[#{k.to_s}]#{k2}", v2]
+          end
+        end
+      elsif value.kind_of?(Array)
+        value.each do |v|
+          check_values(v) do |k2, v2|
+            result << ["[]#{k2}", v2]
+          end
+        end
+      else
+        result << ["", value]
+      end
+      result.each do |arr|
+        yield arr[0], arr[1]
+      end
+    end
   end
 end
