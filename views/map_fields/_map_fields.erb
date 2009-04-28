@@ -1,0 +1,25 @@
+<% form_tag nil, :method => :post do -%>
+  <div class="map_fields">
+    <table cellspacing="0">
+      <thead>
+        <tr>
+          <% (1..@rows[0].size).each do |c| -%>
+            <th><%= select_tag "fields[#{c}]", options_for_select(@fields), :include_blank => true, :class => 'field_options' %></th>
+          <% end -%>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rows.each do |row| -%>
+          <tr>
+            <% row.each do |column| -%>
+              <td><%= h(column) %></td>
+            <% end -%>
+          </tr>
+        <% end -%>
+      </tbody>
+    </table>
+    <div class="action">
+      <%= submit_tag 'Import' %>
+    </div>
+  </div>
+<% end -%>
