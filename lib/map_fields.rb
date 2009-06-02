@@ -1,7 +1,7 @@
 require 'fastercsv'
 
 module MapFields
-  VERSION = '0.0.0'
+  VERSION = '0.1'
 
   def self.included(base)
     base.extend(ClassMethods)
@@ -49,7 +49,8 @@ module MapFields
         @map_fields_error =  InconsistentStateError
       else
         @mapped_fields = MappedFields.new(session[:map_fields][:file], 
-                                          params[:fields])
+                                          params[:fields],
+                                          params[:ignore_first_row])
       end
     end
   end
@@ -88,21 +89,27 @@ module MapFields
   end
 
   class MappedFields
-    def initialize(file, mapping)
+    def initialize(file, mapping, ignore_first_row)
       @file = file
       @mapping = {}
+      @ignore_first_row = ignore_first_row
       mapping.each do |k,v|
         @mapping[v.to_i - 1] = k.to_i - 1 unless v.to_i == 0
       end
     end
 
     def each
+      row_number = 1
       FasterCSV.foreach(@file) do |csv_row|
-        row = []
-        @mapping.each do |k,v|
-          row[k] = csv_row[v]
+        unless row_number == 1 && @ignore_first_row
+          row = []
+          @mapping.each do |k,v|
+            row[k] = csv_row[v]
+          end
+          row.class.send(:define_method, :number) { row_number }
+          yield(row)
         end
-        yield(row)
+        row_number += 1
       end
     end
   end

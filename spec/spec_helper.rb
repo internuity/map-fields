@@ -20,7 +20,7 @@ Spec::Runner.configure do |config|
 end
 
 class TestController < ApplicationController
-  map_fields :create, ['Title', 'Firstname', 'Lastname'], :params => [:user]
+  map_fields :create, ['Title', 'First name', 'Last name'], :params => [:user]
 
   def new
   end
@@ -30,7 +30,8 @@ class TestController < ApplicationController
       mapped_fields.each do |row|
         #deal with the data
         row[0] #=> will be Title
-        row[1] #=> will be Firstname
+        row[1] #=> will be First name
+        row[2] #=> will be Last name
       end
       render :text => ''
     else

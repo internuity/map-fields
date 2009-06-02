@@ -1,4 +1,4 @@
-<% form_tag nil, :method => :post do -%>
+<% form_tag nil, :id => 'map_fields_form', :method => :post do -%>
   <% @parameters.each do |arr| -%>
     <%= hidden_field_tag arr[0], arr[1] %>
   <% end -%>
@@ -21,8 +21,11 @@
         <% end -%>
       </tbody>
     </table>
-    <div class="action">
-      <%= submit_tag 'Import' %>
-    </div>
+  </div>
+  <div class="option">
+    <%= check_box_tag 'ignore_first_row', '1', true, :id => 'ignore_first_row_option' %><label for="ignore_first_row_option">Ignore the first row (headings)</label>
+  </div>
+  <div class="action">
+    <%= submit_tag 'Import' %>
   </div>
 <% end -%>
