@@ -1,6 +1,6 @@
-= map_fields
+= map-fields
 
-* FIX (url)
+* http://github.com/internuity/map-fields
 
 == DESCRIPTION:
 
@@ -8,23 +8,78 @@ A Rails plugin which provides a hook to preview and map the fields of an uploade
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+* Captures the post and provides an intermediate view where a user can map their data to the expected schema
+* Provides a default mapping view that can be customised
+* Allows the import to be part of a larger form (The form fields are remembered through the mapping)
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  ===Lists controller
+    class ListsController < AppliactionController
+      map_fields :create, ['Title', 'First name', 'Last name'], :file_field => :file, :params => [:list]
+
+      def index
+        @lists = List.find(:all)
+      end
+
+      def new
+        @list = List.new
+      end
+
+      def create
+        @list = List.new(params[:list])
+        if fields_mapped?
+          mapped_fields.each do |row|
+            @list.contact.create(:title => row[0], 
+                                 :first_name => row[1], 
+                                 :last_name => row[2])
+          end
+          flash[:notice] = 'Contact list created'
+          redirect_to :action => :index
+        else
+          render
+        end
+      rescue MapFields::InconsistentStateError
+        flash[:error] = 'Please try again'
+        redirect_to :action => :new
+      rescue MapFields::MissingFileContentsError
+        flash[:error] = 'Please upload a file'
+        redirect_to :action => :new
+      end
+    end
+
+  ===New view (new.html.erb)
+    <h1>Import a new List</h1>
+    <% form_for :list, :html => {:multipart => true} do |form| %>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+      <div class="field">
+        <label for="file">File</label>
+        <%= file_field_tag 'file' %>
+      </div>
+      <div class="buttons">
+        <%= form.submit 'Import' %>
+      </div>
+    <% end %>
+
+  ===Create view (create.html.erb)
+    <h1>Import a new List</h1>
+    <p>Please map the details you're importing</p>
+    =render :partial => 'map_fields/map_fields'
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* FasterCSV
 
 == INSTALL:
 
-sudo gem install internuity-map-fields -s http://gems.github.com
+sudo gem install map-fields
 
 or
 
-./script/plugin install git://github.com/internuity/map-fields
+./script/plugin install git://github.com/internuity/map-fields.git
 
 == LICENSE:
 
