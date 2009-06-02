@@ -1,7 +1,7 @@
 require 'fastercsv'
 
 module MapFields
-  VERSION = '0.1'
+  VERSION = '1.0.0'
 
   def self.included(base)
     base.extend(ClassMethods)
@@ -156,4 +156,9 @@ module MapFields
       end
     end
   end
+end
+
+if defined?(Rails) and defined?(ActionController)
+  ActionController::Base.send(:include, MapFields)
+  ActionController::Base.view_paths.push File.expand_path(File.join(File.dirname(__FILE__), '..', 'views'))
 end
