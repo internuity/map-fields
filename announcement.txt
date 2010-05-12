@@ -1,0 +1,12 @@
+map-fields version 1.0.0
+    by Andrew Timberlake
+    http://github.com/internuity/map-fields
+
+== DESCRIPTION
+
+A Rails plugin which provides a hook to preview and map the fields of an uploaded CSV file to a pre-defined schema
+
+== CHANGES
+
+* Initial release
+
