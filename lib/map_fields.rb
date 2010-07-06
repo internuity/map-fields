@@ -12,7 +12,7 @@ module MapFields
       :file_field => 'file',
       :params => []
     }
-    options = default_options.merge( 
+    options = default_options.merge(
                 self.class.read_inheritable_attribute(:map_fields_options)
               )
 
@@ -42,7 +42,7 @@ module MapFields
         if expected_fields.respond_to?(:call)
           expected_fields = expected_fields.call(params)
         end
-        @mapped_fields = MappedFields.new(session[:map_fields][:file], 
+        @mapped_fields = MappedFields.new(session[:map_fields][:file],
                                           expected_fields,
                                           params[:fields],
                                           params[:ignore_first_row])
@@ -79,13 +79,13 @@ module MapFields
   end
 
   def map_field_parameters(&block)
-    
+
   end
 
   def map_fields_cleanup
     if @mapped_fields
       if session[:map_fields][:file]
-        File.delete(session[:map_fields][:file]) 
+        File.delete(session[:map_fields][:file])
       end
       session[:map_fields] = nil
       @mapped_fields = nil
@@ -94,11 +94,11 @@ module MapFields
   end
 
   module ClassMethods
-    def map_fields(action, fields, options = {})
+    def map_fields(actions, fields, options = {})
       write_inheritable_attribute(:map_fields_fields, fields)
       write_inheritable_attribute(:map_fields_options, options)
-      before_filter :map_fields, :only => action
-      after_filter :map_fields_cleanup, :only => action
+      before_filter :map_fields, :only => actions
+      after_filter :map_fields_cleanup, :only => actions
     end
   end
 
@@ -114,7 +114,7 @@ module MapFields
       mapping.each do |k,v|
         unless v.to_i == 0
           #Numeric mapping
-          @mapping[v.to_i - 1] = k.to_i - 1 
+          @mapping[v.to_i - 1] = k.to_i - 1
           #Text mapping
           @mapping[fields[v.to_i-1]] = k.to_i - 1
           #Symbol mapping
@@ -194,4 +194,6 @@ end
 if defined?(Rails) and defined?(ActionController)
   ActionController::Base.send(:include, MapFields)
   ActionController::Base.view_paths.push File.expand_path(File.join(File.dirname(__FILE__), '..', 'views'))
+  #This is a hack but the above code is not enough when using bundler and Rails 2.3.5
+  ActionController::Base.view_paths.push "app/views"
 end
