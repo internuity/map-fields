@@ -49,23 +49,25 @@ module MapFields
       end
     end
 
-    @rows = []
-    begin
-      FasterCSV.foreach(session[:map_fields][:file]) do |row|
-        @rows << row
-        break if @rows.size == 10
+    unless @map_fields_error
+      @rows = []
+      begin
+        FasterCSV.foreach(session[:map_fields][:file]) do |row|
+          @rows << row
+          break if @rows.size == 10
+        end
+      rescue FasterCSV::MalformedCSVError => e
+        @map_fields_error = e
       end
-    rescue FasterCSV::MalformedCSVError => e
-      @map_fields_error = e
-    end
-    expected_fields = self.class.read_inheritable_attribute(:map_fields_fields)
-    if expected_fields.respond_to?(:call)
-      expected_fields = expected_fields.call(params)
-    end
-    @fields = ([nil] + expected_fields).inject([]){ |o, e| o << [e, o.size]}
-    @parameters = []
-    options[:params].each do |param|
-      @parameters += ParamsParser.parse(params, param)
+      expected_fields = self.class.read_inheritable_attribute(:map_fields_fields)
+      if expected_fields.respond_to?(:call)
+        expected_fields = expected_fields.call(params)
+      end
+      @fields = ([nil] + expected_fields).inject([]){ |o, e| o << [e, o.size]}
+      @parameters = []
+      options[:params].each do |param|
+        @parameters += ParamsParser.parse(params, param)
+      end
     end
   end
 
