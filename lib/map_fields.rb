@@ -111,7 +111,7 @@ module MapFields
       @file = file
       @fields = fields
       @mapping = {}
-      @ignore_first_row = ignore_first_row
+      @ignore_first_row = ignore_first_row == '1'
 
       mapping.each do |k,v|
         unless v.to_i == 0
