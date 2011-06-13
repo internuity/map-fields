@@ -7,7 +7,7 @@ begin
     gem.name = "map_fields"
     gem.summary = %Q{Rails plugin to allow a user to map the fields of a CSV to an expected list of fields}
     gem.email = "andrew@andrewtimberlake.com"
-    gem.homepage = "http://github.com/andrewtimberlake/map-fields"
+    gem.homepage = "http://github.com/internuity/map-fields"
     gem.authors = ["Andrew Timberlake"]
   end
   Jeweler::GemcutterTasks.new
