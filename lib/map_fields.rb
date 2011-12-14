@@ -1,5 +1,3 @@
-require 'fastercsv'
-
 module MapFields
   VERSION = '1.0.0'
 
@@ -199,3 +197,4 @@ if defined?(Rails) and defined?(ActionController)
   #This is a hack but the above code is not enough when using bundler and Rails 2.3.5
   ActionController::Base.view_paths.push "app/views"
 end
+
