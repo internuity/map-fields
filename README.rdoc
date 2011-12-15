@@ -4,48 +4,48 @@
 
 == DESCRIPTION:
 
-A Rails plugin which provides a hook to preview and map the fields of an uploaded CSV file to a pre-defined schema
+A Rails gem which provides a hook to preview and map the fields of an uploaded CSV file to a pre-defined schema
 
 == FEATURES/PROBLEMS:
 
 * Captures the post and provides an intermediate view where a user can map their data to the expected schema
 * Provides a default mapping view that can be customised
 * Allows the import to be part of a larger form (The form fields are remembered through the mapping)
+* Can only handle a single uploaded file at a time
 
-== SYNOPSIS:
+== INSTALLATION:
 
-===Lists controller
-  class ListsController < AppliactionController
-    map_fields :create, ['Title', 'First name', 'Last name'], :file_field => :file, :params => [:list]
+gem install map-fields
 
-    def index
-      @lists = List.find(:all)
-    end
+== EXAMPLE:
+
+===TestController
+  class TestController < AppliactionController
 
     def new
       @list = List.new
     end
 
     def create
-      @list = List.new(params[:list])
-      if fields_mapped?
-        mapped_fields.each do |row|
-          @list.contact.create(:title => row[0], 
-                               :first_name => row[1], 
-                               :last_name => row[2])
+      map_fields :get_fields, params[:file] do
+        @list = List.create(params[:list])
+        @mapping.rows.each do |row|
+          @list.contact.create(:title => row[:title], 
+                               :first_name => row[:first_name], 
+                               :last_name => row[:last_name])
         end
         flash[:notice] = 'Contact list created'
         redirect_to :action => :index
-      else
-        render
       end
-    rescue MapFields::InconsistentStateError
-      flash[:error] = 'Please try again'
-      redirect_to :action => :new
-    rescue MapFields::MissingFileContentsError
+    rescue MapFields::MissingFileError
       flash[:error] = 'Please upload a file'
       redirect_to :action => :new
     end
+
+    private
+    def get_fields
+      ['Title', 'First name', 'Last name']
+    end	
   end
 
 ===New view (new.html.erb)
@@ -67,19 +67,12 @@ A Rails plugin which provides a hook to preview and map the fields of an uploade
 ===Create view (create.html.erb)
   <h1>Import a new List</h1>
   <p>Please map the details you're importing</p>
-  =render :partial => 'map_fields/map_fields'
+  =render :partial => 'map_fields/mapping'
 
 == REQUIREMENTS:
 
-* FasterCSV
-
-== INSTALL:
-
-sudo gem install map-fields
-
-or
-
-./script/plugin install git://github.com/internuity/map-fields.git
+* Rails 3.1
+* Ruby 1.9.3 (Not tested on 1.9.1 or 1.9.2
 
 == LICENSE:
 

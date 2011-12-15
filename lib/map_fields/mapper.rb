@@ -4,6 +4,8 @@ require 'map_fields/mapping'
 require 'map_fields/params_parser'
 
 module MapFields
+  class MissingFileError < StandardError; end
+
   class Mapper
     def initialize(controller, fields, file)
       params = controller.params
@@ -14,6 +16,7 @@ module MapFields
         file = save_file controller, file
         @rows = parse_first_few_lines file
       else
+        raise MissingFileError unless controller.session[:map_fields_file] && File.exist?(controller.session[:map_fields_file])
         @mapped = true
         @rows = map_fields(controller, params.delete(:mapped_fields), fields)
       end

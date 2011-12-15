@@ -1153,3 +1153,188 @@ Completed 302 Found in 0ms
   Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
 Redirected to http://test.host/test
 Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fc4b8a889d0 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23980-lm59r1>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.8ms)
+Rendered rails_app/app/views/test/create.html.erb (5.0ms)
+Completed 200 OK in 12ms (Views: 10.8ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fc4b9d38080 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23980-75bhhm>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.8ms)
+Completed 200 OK in 4ms (Views: 3.4ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fc4bc347550 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23980-1oy3mmn>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.0ms)
+Completed 200 OK in 5ms (Views: 3.7ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fc4bc425dc8 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23980-1ouumgh>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Completed 200 OK in 4ms (Views: 3.3ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fc4bc618130 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23980-14jnoa>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Completed 200 OK in 4ms (Views: 3.3ms)
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Redirected to http://test.host/test
+Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Redirected to http://test.host/test
+Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007febfd989978 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23981-7231xh>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.0ms)
+Rendered rails_app/app/views/test/create.html.erb (5.4ms)
+Completed 200 OK in 13ms (Views: 11.4ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007febfbd3b398 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23981-121krxy>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.7ms)
+Completed 200 OK in 4ms (Views: 3.0ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007febfc9f4f58 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23981-1i89wx0>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.1ms)
+Completed 200 OK in 5ms (Views: 3.6ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007febfbfd6b48 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23981-1ecfp0>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.7ms)
+Completed 200 OK in 4ms (Views: 3.0ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007febfcd40270 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23981-etveyv>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.6ms)
+Completed 200 OK in 4ms (Views: 2.8ms)
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Redirected to http://test.host/test
+Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Redirected to http://test.host/test
+Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdefcc4b228 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23987-1k6wv85>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Rendered rails_app/app/views/test/create.html.erb (5.4ms)
+Completed 200 OK in 13ms (Views: 11.5ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdefe29d800 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23987-1nb4zlj>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Completed 200 OK in 4ms (Views: 3.4ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdefcd15be0 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23987-2wxya5>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.0ms)
+Completed 200 OK in 5ms (Views: 3.5ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdefcd6e7e0 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23987-12uw4jf>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.7ms)
+Completed 200 OK in 4ms (Views: 3.0ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdefcf74fd0 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23987-ppi5e5>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Completed 200 OK in 4ms (Views: 3.4ms)
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdb56cce3e8 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23988-1xv4kcp>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Rendered rails_app/app/views/test/create.html.erb (5.9ms)
+Completed 200 OK in 14ms (Views: 12.4ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdb54a95f60 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23988-wltjpe>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.1ms)
+Completed 200 OK in 5ms (Views: 3.6ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdb56bb73b0 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23988-j3ynqm>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.0ms)
+Completed 200 OK in 4ms (Views: 3.4ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdb56964158 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23988-yej61t>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.8ms)
+Completed 200 OK in 4ms (Views: 3.1ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fdb56ae25e8 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23988-h509b4>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.1ms)
+Completed 200 OK in 5ms (Views: 3.8ms)
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007ff64d31c860 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23993-1mekr5a>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.8ms)
+Rendered rails_app/app/views/test/create.html.erb (5.6ms)
+Completed 200 OK in 13ms (Views: 12.3ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007ff64ada25a8 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23993-4h38zs>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Completed 200 OK in 4ms (Views: 3.5ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007ff64c8aa878 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23993-8q032k>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.1ms)
+Completed 200 OK in 5ms (Views: 3.7ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007ff64cbda4f8 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23993-12ikiw2>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Completed 200 OK in 4ms (Views: 3.5ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007ff64cca9bb8 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-23993-16pp3b3>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.8ms)
+Completed 200 OK in 4ms (Views: 3.0ms)
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Redirected to http://test.host/test
+Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Redirected to http://test.host/test
+Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fab8c296550 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-24001-c6i4e1>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.8ms)
+Rendered rails_app/app/views/test/create.html.erb (5.0ms)
+Completed 200 OK in 12ms (Views: 10.8ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fab8c48b248 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-24001-qmherp>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.1ms)
+Completed 200 OK in 5ms (Views: 3.6ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fab8c4c7d10 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-24001-ia3u37>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Completed 200 OK in 5ms (Views: 3.5ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fab8c424278 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-24001-1s9k8uh>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (2.0ms)
+Completed 200 OK in 5ms (Views: 3.6ms)
+  Processing by TestController#create as HTML
+  Parameters: {"file"=>#<Rack::Test::UploadedFile:0x007fab893c4380 @content_type=nil, @original_filename="test.csv", @tempfile=#<File:/var/folders/zd/nfpm3sfx5yx34057l7r0f_mm0000gn/T/test.csv20111215-24001-1a81x2w>>, "post"=>{"title"=>"Test Title", "body"=>"Test body"}}
+Rendered views/map_fields/_mapping.erb (1.9ms)
+Completed 200 OK in 4ms (Views: 3.4ms)
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Redirected to http://test.host/test
+Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Redirected to http://test.host/test
+Completed 302 Found in 0ms
+  Processing by TestController#create as HTML
+  Parameters: {"mapped_fields"=>{"0"=>"2", "1"=>"1", "3"=>"0"}}
+Completed 500 Internal Server Error in 0ms

@@ -63,4 +63,10 @@ describe TestController, :type => :controller do
       response.should redirect_to(action: :index)
     end
   end
+
+  context "POST #create with mapped fields but a missing file" do
+    it "should raise an error" do
+      expect { post :create, :mapped_fields => {'0' => '2', '1' => '1', '3' => '0'} }.to raise_error(MapFields::MissingFileError)
+    end
+  end
 end
