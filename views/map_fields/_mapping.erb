@@ -1,18 +1,18 @@
-bb<% form_tag nil, :id => 'map_fields_form', :method => :post do -%>
-  <% @parameters.each do |arr| -%>
+<%= form_tag nil, :id => 'map_fields_form', :method => :post do -%>
+  <% @mapper.params.each do |arr| -%>
     <%= hidden_field_tag arr[0], arr[1] %>
   <% end -%>
   <div class="map_fields">
     <table cellspacing="0">
       <thead>
         <tr>
-          <% (1..@rows[0].size).each do |c| -%>
-            <th><%= select_tag "fields[#{c}]", options_for_select(@fields), :include_blank => true, :class => 'field_options' %></th>
+          <% (1..@mapper.rows[0].size).each do |c| -%>
+            <th><%= select_tag "fields[#{c}]", options_for_select(@mapper.fields), :include_blank => true, :class => 'field_options' %></th>
           <% end -%>
         </tr>
       </thead>
       <tbody>
-        <% @rows.each do |row| -%>
+        <% @mapper.rows.each do |row| -%>
           <tr>
             <% row.each do |column| -%>
               <td><%= h(column) %></td>

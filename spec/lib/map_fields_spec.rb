@@ -20,9 +20,11 @@ class TestController < ActionController::Base
 end
 
 describe TestController, :type => :controller do
+  render_views
+
   context "POST #create with uploaded file" do
     before do
-      post :create, :file => fixture_file_upload('spec/files/test.csv')
+      post :create, file: fixture_file_upload('spec/files/test.csv'), post: {title: 'Test Title', body: 'Test body'}
     end
 
     it "should respond with success" do
@@ -35,6 +37,15 @@ describe TestController, :type => :controller do
 
     it "should render the create template" do
       response.should render_template('create')
+    end
+
+    it "should parse out the parameters" do
+      mapper = assigns[:mapper]
+      mapper.params.should == [['post[title]', 'Test Title'], ['post[body]', 'Test body']]
+    end
+
+    it "should render the map fields form" do
+      response.body.should match(/id="map_fields_form"/)
     end
   end
 

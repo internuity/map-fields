@@ -1,31 +1,37 @@
 require 'csv'
 require 'tempfile'
 require 'map_fields/mapping'
+require 'map_fields/params_parser'
 
 module MapFields
   class Mapper
     def initialize(controller, fields, file)
+      params = controller.params
       @fields = get_fields(controller, fields)
+      @params = ParamsParser.parse(params)
 
       if file
         file = save_file controller, file
         @rows = parse_first_few_lines file
       else
         @mapped = true
-        @rows = map_fields(controller, fields)
+        @rows = map_fields(controller, params.delete(:mapped_fields), fields)
       end
     end
-    attr_reader :rows, :fields
+    attr_reader :rows, :fields, :params
 
     def mapped?
       @mapped
     end
 
     private
-    def map_fields(controller, fields)
-      field_mapping = controller.params.delete(:mapped_fields)
-      ignore_first_row = field_mapping.delete(:ignore_first_row)
-      mapping = Mapping.new(field_mapping, fields)
+    def parse_params(params)
+      params = params.except(:controller, :action)
+    end
+
+    def map_fields(controller, mapped_fields, fields)
+      ignore_first_row = mapped_fields.delete(:ignore_first_row)
+      mapping = Mapping.new(mapped_fields, fields)
       CSVReader.new(controller.session[:map_fields_file], mapping, ignore_first_row)
     end
 
