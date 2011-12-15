@@ -1,9 +1,12 @@
 ENV['RAILS_ENV'] = 'test'
 
+$:.unshift File.expand_path('../../lib', __FILE__)
+
 require 'bundler'
 require File.expand_path('../../rails_app/config/environment.rb', __FILE__)
 require 'rails/test_help'
 require 'rspec/rails'
+require 'map_fields'
 
 RailsApp::Application.routes.draw do
   resources :test
