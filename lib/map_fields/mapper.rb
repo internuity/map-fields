@@ -22,11 +22,15 @@ module MapFields
         @rows = map_fields(controller, params.delete(:mapped_fields), @fields)
       end
     end
-    attr_reader :rows, :fields, :params, :mapping, :ignore_first_row
+    attr_reader :rows, :fields, :params, :ignore_first_row
 
     def error!
       @mapped = false
       @rows = parse_first_few_lines @controller.session[:map_fields_file]
+    end
+
+    def mapping
+      @mapping['mapping']
     end
 
     def mapped?
@@ -49,10 +53,6 @@ module MapFields
 
     def each(&block)
       @rows.each &block
-    end
-
-    def [](key)
-      @mapping[key]
     end
 
     def file
