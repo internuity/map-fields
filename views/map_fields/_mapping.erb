@@ -1,4 +1,4 @@
-<%= form_tag nil, :id => 'map_fields_form', :method => :post do -%>
+<form method="post" action="" id="map_fields_form">
   <% @mapper.params.each do |arr| -%>
     <%= hidden_field_tag arr[0], arr[1] %>
   <% end -%>
@@ -28,4 +28,4 @@
   <div class="action">
     <%= submit_tag 'Import' %>
   </div>
-<% end -%>
+</form>
