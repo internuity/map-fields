@@ -6,6 +6,10 @@ require 'bundler'
 require File.expand_path('../../rails_app/config/environment.rb', __FILE__)
 require 'rails/test_help'
 require 'rspec/rails'
+
+require 'simplecov'
+SimpleCov.start
+
 require 'map_fields'
 
 RailsApp::Application.routes.draw do

@@ -1,4 +1,5 @@
 require 'map_fields/mapper'
+require 'active_support/all'
 
 module MapFields
   describe Mapper do
@@ -55,11 +56,51 @@ module MapFields
       end
     end
 
+    context "#error!" do
+      it "reloads the file preview for cases when an error is detected within the controller and the mapping form should be shown again" do
+        mapper = Mapper.new(controller, [], file)
+        mapper.error!
+        mapper.should_not be_mapped
+      end
+    end
+
+    context "#is_mapped?" do
+      it "returns false if no mapping has taken place" do
+        mapper = Mapper.new(controller, [], file)
+        mapper.is_mapped?(:field_1).should be_false
+      end
+
+      it "returns false if the field has not been mapped" do
+        fields = %w(Email Lastname Title Firstname)
+        controller.stub(:session => {map_fields_file: File.expand_path('spec/files/test.csv')})
+        controller.should_receive(:params).and_return(mapped_fields: {:ignore_first_row => '1', '3' => '0', '2' => '1', '0' => '2', '1' => '3'})
+        mapper = Mapper.new(controller, fields, nil)
+        mapper.is_mapped?(:unkown).should be_false
+      end
+
+      it "returns true if the field has not been mapped" do
+        fields = %w(Email Lastname Title Firstname)
+        controller.stub(:session => {map_fields_file: File.expand_path('spec/files/test.csv')})
+        controller.should_receive(:params).and_return(mapped_fields: {:ignore_first_row => '1', '3' => '0', '2' => '1', '0' => '2', '1' => '3'})
+        mapper = Mapper.new(controller, fields, nil)
+        mapper.is_mapped?(:email).should be_true
+      end
+    end
+
+    context "#file" do
+      it "returns the file that was uploaded" do
+        file = File.expand_path('spec/files/test.csv')
+        controller.stub(:session => {map_fields_file: file})
+        mapper = Mapper.new(controller, fields, nil)
+        mapper.file.should == file
+      end
+    end
+
     context "mapping fields" do
       it "decorates the CSV reader to allow easy access to rows by field" do
         fields = %w(Email Lastname Title Firstname)
         controller.stub(:session => {map_fields_file: File.expand_path('spec/files/test.csv')})
-        controller.should_receive(:params).and_return(mapped_fields: {:ignore_first_row => true, '0' => '3', '1' => '2', '2' => '0', '3' => '1'})
+        controller.should_receive(:params).and_return(mapped_fields: {:ignore_first_row => '1', '3' => '0', '2' => '1', '0' => '2', '1' => '3'})
         mapper = Mapper.new(controller, fields, nil)
         mapper.rows[0]['Title'].should == 'Mr'
       end
@@ -67,9 +108,9 @@ module MapFields
       it "supports the each syntax" do
         fields = %w(Email Lastname Title Firstname)
         controller.stub(:session => {map_fields_file: File.expand_path('spec/files/test.csv')})
-        controller.should_receive(:params).and_return(mapped_fields: {:ignore_first_row => true, '0' => '3', '1' => '2', '2' => '0', '3' => '1'})
+        controller.should_receive(:params).and_return(mapped_fields: {:ignore_first_row => true, '3' => '0', '2' => '1', '0' => '2', '1' => '3'})
         mapper = Mapper.new(controller, fields, nil)
-        mapper.rows.each do |row|
+        mapper.each do |row|
           row[:title].should == 'Mr'
           break
         end

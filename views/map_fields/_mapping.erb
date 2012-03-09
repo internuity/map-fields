@@ -6,8 +6,8 @@
     <table cellspacing="0">
       <thead>
         <tr>
-          <% (1..@mapper.rows[0].size).each do |c| -%>
-            <th><%= select_tag "fields[#{c}]", options_for_select(@mapper.fields), :include_blank => true, :class => 'field_options' %></th>
+          <% (0..@mapper.rows[0].size-1).each do |c| -%>
+            <th><%= select_tag "mapped_fields[#{c}]", options_for_select(@mapper.fields_for_select, @mapper.selected_mapping(c)), :include_blank => true, :class => 'field_options' %></th>
           <% end -%>
         </tr>
       </thead>
@@ -23,7 +23,7 @@
     </table>
   </div>
   <div class="option">
-    <%= check_box_tag 'ignore_first_row', '1', true, :id => 'ignore_first_row_option' %><label for="ignore_first_row_option">Ignore the first row (headings)</label>
+    <%= check_box_tag 'mapped_fields[ignore_first_row]', '1', true, :id => 'ignore_first_row_option' %><label for="ignore_first_row_option">Ignore the first row (headings)</label>
   </div>
   <div class="action">
     <%= submit_tag 'Import' %>

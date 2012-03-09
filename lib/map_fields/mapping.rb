@@ -5,8 +5,9 @@ module MapFields
       @fields = fields
 
       @mapping = mapping.each_with_object({}){ |arr, hash|
-        key = arr[0].to_i
-        value = arr[1].to_i
+        key = arr[1].blank? ? nil : arr[1].to_i
+        next if key.nil?
+        value = arr[0].blank? ? nil : arr[0].to_i
 
         hash[key] = value
         hash[@fields[key]] = value
@@ -16,6 +17,14 @@ module MapFields
 
     def [](index)
       @mapping[index]
+    end
+
+    def is_mapped?(key)
+      @mapping.has_key?(key)
+    end
+
+    def selected_mapping(column)
+      @mapping.find{|k, v| return k if v == column && k.is_a?(Numeric) }
     end
 
     private

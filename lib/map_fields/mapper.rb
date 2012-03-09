@@ -8,6 +8,7 @@ module MapFields
 
   class Mapper
     def initialize(controller, fields, file)
+      @controller = controller
       params = controller.params
       @fields = get_fields(controller, fields)
       @params = ParamsParser.parse(params)
@@ -18,24 +19,51 @@ module MapFields
       else
         raise MissingFileError unless controller.session[:map_fields_file] && File.exist?(controller.session[:map_fields_file])
         @mapped = true
-        @rows = map_fields(controller, params.delete(:mapped_fields), fields)
+        @rows = map_fields(controller, params.delete(:mapped_fields), @fields)
       end
     end
-    attr_reader :rows, :fields, :params
+    attr_reader :rows, :fields, :params, :mapping, :ignore_first_row
+
+    def error!
+      @mapped = false
+      @rows = parse_first_few_lines @controller.session[:map_fields_file]
+    end
 
     def mapped?
       @mapped
     end
 
-    private
-    def parse_params(params)
-      params = params.except(:controller, :action)
+    def selected_mapping(column)
+      @mapping ? @mapping.selected_mapping(column) : nil
     end
 
+    def is_mapped?(key)
+      @mapping ? @mapping.is_mapped?(key) : false
+    end
+
+    def fields_for_select
+      result = []
+      fields.each_with_index { |i,e| result << [i, e] }
+      result
+    end
+
+    def each(&block)
+      @rows.each &block
+    end
+
+    def [](key)
+      @mapping[key]
+    end
+
+    def file
+      @controller.session[:map_fields_file]
+    end
+
+    private
     def map_fields(controller, mapped_fields, fields)
-      ignore_first_row = mapped_fields.delete(:ignore_first_row)
-      mapping = Mapping.new(mapped_fields, fields)
-      CSVReader.new(controller.session[:map_fields_file], mapping, ignore_first_row)
+      @ignore_first_row = !!mapped_fields.delete(:ignore_first_row)
+      @mapping = Mapping.new(mapped_fields, fields)
+      CSVReader.new(controller.session[:map_fields_file], @mapping, @ignore_first_row)
     end
 
     def get_fields(controller, fields)
@@ -49,10 +77,12 @@ module MapFields
     end
 
     def save_file(controller, file)
-      Tempfile.open(['map_fields', '.csv']) do |tmpfile|
+      # path = Tempfile.new(['map_fields', '.csv']).path
+      path = File.join(Dir::tmpdir, "map_fields_#{Time.now.to_i}_#{$$}")
+      File.open(path, 'wb') do |tmpfile|
         tmpfile.write file.read
-        controller.session[:map_fields_file] = tmpfile.path
-        tmpfile.path
+        controller.session[:map_fields_file] = path
+        path
       end
     end
 

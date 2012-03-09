@@ -1,2 +1,4 @@
 pkg/
 tmp/
+coverage/
+map_fields*.gem
