@@ -14,6 +14,7 @@ module MapFields
         hash[field_to_symbol(@fields[key])] = value
       }
     end
+    attr_reader :mapping
 
     def [](index)
       @mapping[index]

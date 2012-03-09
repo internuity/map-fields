@@ -30,7 +30,7 @@ module MapFields
     end
 
     def mapping
-      @mapping['mapping']
+      @mapping.mapping
     end
 
     def mapped?
