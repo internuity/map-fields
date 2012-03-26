@@ -7,11 +7,12 @@ module MapFields
   class MissingFileError < StandardError; end
 
   class Mapper
-    def initialize(controller, fields, file)
+    def initialize(controller, fields, file, options={})
       @controller = controller
       params = controller.params
       @fields = get_fields(controller, fields)
       @params = ParamsParser.parse(params)
+      @options = options
 
       if file
         file = save_file controller, file
@@ -89,7 +90,7 @@ module MapFields
     def parse_first_few_lines(file)
       rows = []
       rowcount = 0
-      CSV.foreach(file) do |row|
+      CSV.foreach(file, encoding: @options[:encoding] || 'UTF-8') do |row|
         rows << row
         break if (rowcount += 1) >= 10
       end
