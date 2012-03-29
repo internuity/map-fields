@@ -135,5 +135,9 @@ module MapFields
     def [](index)
       @row[@mapping[index]]
     end
+
+    def size
+      @row.size
+    end
   end
 end
