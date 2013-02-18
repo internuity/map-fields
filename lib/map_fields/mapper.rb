@@ -57,7 +57,7 @@ module MapFields
     end
 
     def file
-      @controller.session[:map_fields_file]
+      UploadedFile.new(@controller.session[:map_fields_file], @controller.session[:map_fields_file_name])
     end
 
     private
@@ -78,13 +78,13 @@ module MapFields
     end
 
     def save_file(controller, file)
-      # path = Tempfile.new(['map_fields', '.csv']).path
-      path = File.join(Dir::tmpdir, "map_fields_#{Time.now.to_i}_#{$$}")
+      path = Rails.root.join("tmp/map_fields_#{Time.now.to_i}_#{$$}")
       File.open(path, 'wb') do |tmpfile|
         tmpfile.write file.read
-        controller.session[:map_fields_file] = path
-        path
       end
+      controller.session[:map_fields_file] = path
+      controller.session[:map_fields_file_name] = file.respond_to?(:original_filename) ? file.original_filename : File.basename(file)
+      path
     end
 
     def parse_first_few_lines(file)
@@ -138,6 +138,22 @@ module MapFields
 
     def size
       @row.size
+    end
+  end
+
+  class UploadedFile
+    def initialize(file_path, original_filename)
+      @file = File.open(file_path)
+      @original_filename = original_filename
+    end
+    attr_reader :file, :original_filename
+
+    def respond_to?(method_id, *args)
+      super || file.respond_to?(method_id, *args)
+    end
+
+    def method_missing(method_id, *args, &block)
+      file.send(method_id, *args, &block)
     end
   end
 end

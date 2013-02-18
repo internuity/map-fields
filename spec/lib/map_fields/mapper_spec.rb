@@ -88,11 +88,20 @@ module MapFields
     end
 
     context "#file" do
+      let(:file) { File.expand_path('spec/files/test.csv') }
+
+      before do
+        controller.stub(:session => {map_fields_file: file, map_fields_file_name: 'test.csv'})
+      end
+
       it "returns the file that was uploaded" do
-        file = File.expand_path('spec/files/test.csv')
-        controller.stub(:session => {map_fields_file: file})
         mapper = Mapper.new(controller, fields, nil)
-        mapper.file.should == file
+        mapper.file.should be_a(UploadedFile)
+      end
+
+      it "includes the original file name" do
+        mapper = Mapper.new(controller, fields, nil)
+        mapper.file.original_filename.should == 'test.csv'
       end
     end
 
