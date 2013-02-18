@@ -64,7 +64,7 @@ module MapFields
     def map_fields(controller, mapped_fields, fields)
       @ignore_first_row = !!mapped_fields.delete(:ignore_first_row)
       @mapping = Mapping.new(mapped_fields, fields)
-      CSVReader.new(controller.session[:map_fields_file], @mapping, @ignore_first_row)
+      CSVReader.new(controller.session[:map_fields_file], @mapping, @ignore_first_row, @options)
     end
 
     def get_fields(controller, fields)
@@ -99,10 +99,10 @@ module MapFields
   end
 
   class CSVReader
-    def initialize(file, mapping, ignore_first_row)
+    def initialize(file, mapping, ignore_first_row, options)
       @mapping = mapping
       @ignore_first_row = ignore_first_row
-      @csv = CSV.open(file, :headers => ignore_first_row)
+      @csv = CSV.open(file, :headers => ignore_first_row, encoding: options[:encoding] || 'UTF-8')
       @rows = nil
     end
 

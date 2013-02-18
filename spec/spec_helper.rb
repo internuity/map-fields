@@ -12,6 +12,8 @@ SimpleCov.start
 
 require 'map_fields'
 
+FileUtils.mkdir_p Rails.root.join('tmp')
+
 RailsApp::Application.routes.draw do
   resources :test
 end
