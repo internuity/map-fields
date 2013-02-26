@@ -57,6 +57,7 @@ module MapFields
     end
 
     def file
+      return nil unless @controller.session[:map_fields_file]
       UploadedFile.new(@controller.session[:map_fields_file], @controller.session[:map_fields_file_name])
     end
 
