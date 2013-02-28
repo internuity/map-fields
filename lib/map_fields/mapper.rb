@@ -7,15 +7,15 @@ module MapFields
   class MissingFileError < StandardError; end
 
   class Mapper
-    def initialize(controller, fields, file, options={})
+    def initialize(controller, fields, file_field, options={})
       @controller = controller
       params = controller.params
       @fields = get_fields(controller, fields)
       @params = ParamsParser.parse(params)
       @options = options
 
-      if file
-        file = save_file controller, file
+      if file_field
+        file = save_file controller, file_field
         @rows = parse_first_few_lines file
       else
         raise MissingFileError unless controller.session[:map_fields_file] && File.exist?(controller.session[:map_fields_file])
@@ -58,6 +58,7 @@ module MapFields
 
     def file
       return nil unless @controller.session[:map_fields_file]
+
       UploadedFile.new(@controller.session[:map_fields_file], @controller.session[:map_fields_file_name])
     end
 
@@ -65,7 +66,7 @@ module MapFields
     def map_fields(controller, mapped_fields, fields)
       @ignore_first_row = !!mapped_fields.delete(:ignore_first_row)
       @mapping = Mapping.new(mapped_fields, fields)
-      CSVReader.new(controller.session[:map_fields_file], @mapping, @ignore_first_row, @options)
+      CSVReader.new(file, @mapping, @ignore_first_row, @options)
     end
 
     def get_fields(controller, fields)
