@@ -11,6 +11,8 @@ module MapFields
       @controller = controller
       params = controller.params
       @fields = get_fields(controller, fields)
+      @file_path = params.delete(:_map_fields_file)
+      @file_name = params.delete(:_map_fields_file_name)
       @params = ParamsParser.parse(params)
       @options = options
 
@@ -18,7 +20,7 @@ module MapFields
         file = save_file controller, file_field
         @rows = parse_first_few_lines file
       else
-        raise MissingFileError unless controller.session[:map_fields_file] && File.exist?(controller.session[:map_fields_file])
+        raise MissingFileError unless @file_path && File.exist?(@file_path)
         @mapped = true
         @rows = map_fields(controller, params.delete(:mapped_fields), @fields)
       end
@@ -27,7 +29,7 @@ module MapFields
 
     def error!
       @mapped = false
-      @rows = parse_first_few_lines @controller.session[:map_fields_file]
+      @rows = parse_first_few_lines file
     end
 
     def mapping
@@ -57,9 +59,9 @@ module MapFields
     end
 
     def file
-      return nil unless @controller.session[:map_fields_file]
+      return nil unless @file_path
 
-      UploadedFile.new(@controller.session[:map_fields_file], @controller.session[:map_fields_file_name])
+      UploadedFile.new(@file_path, @file_name)
     end
 
     private
@@ -84,8 +86,8 @@ module MapFields
       File.open(path, 'wb') do |tmpfile|
         tmpfile.write file.read
       end
-      controller.session[:map_fields_file] = path
-      controller.session[:map_fields_file_name] = file.respond_to?(:original_filename) ? file.original_filename : File.basename(file)
+      @params << [:_map_fields_file, path]
+      @params << [:_map_fields_file_name, file.respond_to?(:original_filename) ? file.original_filename : File.basename(file)]
       path
     end
 
